@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5">
+                    <button id="firstbutton" type="button" class="btn btn-primary btn-lg btn-block">Press Me For A Good Test</button>
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <h2 class="display-4">This will ping the backend. </h2>
+                    <p>If You click this button it will ping the backend without the trace spans.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <button id="firstbutton" type="button" class="btn btn-info btn-lg btn-block">Press Me For A Bad Test</button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <h2 class="display-4">This will ping the "trial" background</h2>
+                    <p>When you click, the button will change light blue to red and back. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
