@@ -7,6 +7,8 @@ from flask import Flask, jsonify
 
 import logging
 from jaeger_client import Config
+from flask_opentracing import FlaskTracing
+
 
 
 
@@ -82,7 +84,7 @@ def beta():
     for key, value in r.headers.items():
         print(key, ":", value)
         dict.update({key: value})
-    rdb.mset(dict)    
+    rdbg.mset(dict)    
     return jsonify(dict)      
 
 
