@@ -2,3 +2,4 @@ Flask==1.1.2
 gunicorn==20.0.4
 opentracing==2.4.0
 jaeger-client==4.3.0
+redis==3.5.3

@@ -8,7 +8,13 @@ from flask import Flask, jsonify
 import logging
 from jaeger_client import Config
 
+
+
+import redis
+
 app = Flask(__name__)
+
+rdb = redis.Redis(host='redis-primary.default.svc.cluster.local', port=6379, db=0)
 
 
 def init_tracer(service):
@@ -30,8 +36,8 @@ def init_tracer(service):
     return config.initialize_tracer()
 
 
+#starter code
 tracer = init_tracer('test-service')
-
 
 with tracer.start_span('first-span') as span:
     span.set_tag('first-tag', '100')
@@ -47,7 +53,7 @@ def hello_world():
 
 @app.route('/alpha')
 def alpha():
-    for i in range(reps):
+    for i in range(100):
         do_heavy_work():
         if i % 100 == 99:
             time.sleep(10)
@@ -63,6 +69,20 @@ def beta():
     for key, value in r.headers.items():
         print(key, ":", value)
         dict.update({key: value})
+    return jsonify(dict)      
+
+
+
+@app.route('/redis')
+def beta():
+    for i in range(50):
+    do_heavy_redis():
+    r = requests.get("https://www.google.com/search?q=python")
+    dict = {}
+    for key, value in r.headers.items():
+        print(key, ":", value)
+        dict.update({key: value})
+    rdb.mset(dict)    
     return jsonify(dict)      
 
 
