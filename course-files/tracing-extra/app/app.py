@@ -9,10 +9,8 @@ import logging
 from jaeger_client import Config
 from flask_opentracing import FlaskTracing
 
-
-
-
 import redis
+import redis_opentracing
 
 app = Flask(__name__)
 
@@ -41,10 +39,11 @@ def init_tracer(service):
 #starter code
 tracer = init_tracer('test-service')
 
+# not entirely sure but I believe there's a flask_opentracing.init_tracing() missing here
+redis_opentracing.init_tracing(tracer, trace_all_classes=False)
+
 with tracer.start_span('first-span') as span:
     span.set_tag('first-tag', '100')
-
-
 
 
 @app.route('/')
@@ -56,12 +55,10 @@ def hello_world():
 @app.route('/alpha')
 def alpha():
     for i in range(100):
-        do_heavy_work():
+        do_heavy_work() # removed the colon here since it caused a syntax error - not sure about its purpose?
         if i % 100 == 99:
             time.sleep(10)
     return 'This is the Alpha Endpoint!'
-
-
 
  
 @app.route('/beta')
@@ -75,16 +72,17 @@ def beta():
 
 
 
-@app.route('/redis')
-def beta():
-    for i in range(50):
-    do_heavy_redis():
+@app.route('/writeredis') # needed to rename this view to avoid function name collision with redis import
+def writeredis():
+    # start tracing the redis client
+    redis_opentracing.trace_client(rdb)    
     r = requests.get("https://www.google.com/search?q=python")
     dict = {}
-    for key, value in r.headers.items():
+    # put the first 50 results into dict
+    for key, value in r.headers.items()[:50]:
         print(key, ":", value)
         dict.update({key: value})
-    rdbg.mset(dict)    
+    rdb.mset(dict)    
     return jsonify(dict)      
 
 
