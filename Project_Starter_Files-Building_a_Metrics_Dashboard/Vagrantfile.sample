@@ -85,6 +85,6 @@ Vagrant.configure("2") do |config|
 
   args = []
       config.vm.provision "k3s shell script", type: "shell",
-          path: "scripts/k3s.sh",
+          path: "k3s.sh",
           args: args
 end
