@@ -7,10 +7,6 @@ ENV APP_HOME /app
 WORKDIR $APP_HOME
 COPY . ./
 
-#ARG PROJECT_ID
-#ENV PROJECT_ID ${PROJECT_ID}
-
-
 # Install production dependencies.
 RUN apt-get update && \
     pip install --upgrade pip && \
