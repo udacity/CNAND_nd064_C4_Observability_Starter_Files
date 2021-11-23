@@ -7,32 +7,29 @@ from flask_opentracing import FlaskTracing
 app = Flask(__name__)
 config = Config(
     config={
-        'sampler':
-        {'type': 'const',
-         'param': 1},
-                        'logging': True,
-                        'reporter_batch_size': 1,},
-                        service_name="service")
+        "sampler": {"type": "const", "param": 1},
+        "logging": True,
+        "reporter_batch_size": 1,
+    },
+    service_name="service",
+)
 jaeger_tracer = config.initialize_tracer()
 tracing = FlaskTracing(jaeger_tracer, True, app)
 
 
-@app.route('/')
+@app.route("/")
 def hello_world():
 
-    return f"""Hello, World!
+    return """Hello, World!
 
 Thank you for visiting the site!\n\n"""
 
 
-
-@app.route('/api/second', methods=['GET', 'POST'])
+@app.route("/api/second", methods=["GET", "POST"])
 def jobs():
-    if request.method == 'GET':
+    if request.method == "GET":
         response = requests.get("http://second-sample-app.default.svc.cluster.local:8000")
         return str(type(response))
-    elif request.method == 'POST':
+    elif request.method == "POST":
         response = requests.get("http://second-sample-app.default.svc.cluster.local:8000")
         return str(type(response))
-
-
