@@ -9,7 +9,10 @@ COPY . ./
 
 # Install production dependencies.
 RUN pip install -r requirements.txt
+# Install dependecies without installing package depencies to avoid conflicts
+RUN pip install --no-deps redis-opentracing
 
+ENV PORT=7111
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.
 # For environments with multiple CPU cores, increase the number of workers
