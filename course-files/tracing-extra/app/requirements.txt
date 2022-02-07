@@ -1,8 +1,9 @@
 Flask==1.1.2
 gunicorn==20.0.4
 opentracing==2.4.0
-jaeger-client==4.3.0
+jaeger-client==4.6.1
 redis==3.5.3
 opentracing==2.4.0
 Flask-OpenTracing==1.1.0
 prometheus-client==0.12.0
+requests==2.26.0
