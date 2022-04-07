@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: trial
-        image: ghcr.io/thejaysmith/trial:v1
+        image: ghcr.io/jasonsmithio/trial:v1
         ports:
         - containerPort: 8080
 ---

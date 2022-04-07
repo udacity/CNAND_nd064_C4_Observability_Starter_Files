@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: second-sample-app
-          image: ghcr.io/thejaysmith/my-sample-app:v2
+          image: ghcr.io/jasonsmithio/my-sample-app:v2
           imagePullPolicy: Always
           ports:
             - name: backend
