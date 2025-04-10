@@ -20,6 +20,9 @@ spec:
         - name: my-sample-app
           image: ghcr.io/jasonsmithio/my-sample-app:v1
           imagePullPolicy: Always
+          env:
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: "http://jaeger-collector.observability.svc.cluster.local:4318"
           ports:
             - name: frontend
               containerPort: 8888

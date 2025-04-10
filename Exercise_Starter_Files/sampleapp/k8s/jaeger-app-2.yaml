@@ -1,8 +1,3 @@
-apiVersion: jaegertracing.io/v1
-kind: Jaeger
-metadata:
-  name: secondtest
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,6 +20,9 @@ spec:
         - name: second-sample-app
           image: ghcr.io/jasonsmithio/my-sample-app:v2
           imagePullPolicy: Always
+          env:
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: "http://jaeger-collector.observability.svc.cluster.local:4318"          
           ports:
             - name: backend-port
               containerPort: 8000
