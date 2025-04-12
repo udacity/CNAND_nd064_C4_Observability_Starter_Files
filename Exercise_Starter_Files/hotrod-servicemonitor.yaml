@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: hotrod-monitor
+  namespace: monitoring  # this must match Prometheus namespace
+  labels:
+    release: prometheus  # must match your Prometheus release label
+spec:
+  selector:
+    matchLabels:
+      app: hotrod          # must match labels on the hotrod *Service*
+  namespaceSelector:
+    matchNames:
+    - default              # <-- hotrod is here
+  endpoints:
+  - port: hotrod           # must match port name in Service
+    path: /metrics
+    interval: 15s

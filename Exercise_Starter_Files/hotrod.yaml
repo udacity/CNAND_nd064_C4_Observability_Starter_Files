@@ -6,7 +6,8 @@ metadata:
     app: hotrod
 spec:
   ports:
-    - port: 8080
+    - name: hotrod
+      port: 8080
   selector:
     app: hotrod
     tier: frontend
