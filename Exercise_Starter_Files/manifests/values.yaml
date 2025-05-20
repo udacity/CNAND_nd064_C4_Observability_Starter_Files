@@ -1,0 +1,9 @@
+collector:
+  service:
+    otlp:
+      http:
+        port: 4318
+        name: otlp-http
+      grpc:
+        port: 4317
+        name: otlp-grpc
