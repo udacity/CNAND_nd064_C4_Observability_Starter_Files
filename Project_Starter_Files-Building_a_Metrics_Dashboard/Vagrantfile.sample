@@ -46,7 +46,10 @@ Vagrant.configure("2") do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.10"
+  # Use 192.168.56.0/21 — the default host-only range allowed by VirtualBox 7.x.
+  # Older 6.1.x accepts it too, so this works on both Vagrant 2.2.10+/VBox 6.1.x
+  # and Vagrant 2.4.x/VBox 7.1.x without editing /etc/vbox/networks.conf.
+  config.vm.network "private_network", ip: "192.168.56.4"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
